@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+
+    <style>
+        #mapISS {
+            height: 300px;
+            width: 700px;
+
+        }
+    </style>
+
+    <title>
+        coordinates
+    </title>
+    <h1>coordinates?</h1>
+</head>
+
+<body>
+
+
+    <p>latitude : <input type ="number" id="lat" > &deg </p>
+    <p>longitude: <input type ="number" id="long" >&deg </p>
+    <button type="button" class="btn btn-primary" id="newBtn">get coordinates</button>
+    <div id="mapISS"></div>
+
+<script>
+
+const button = document.getElementById('newBtn')
+
+
+const mymap = L.map('mapISS').setView([0, 0], 1);
+const marker = L.marker([0, 0]).addTo(mymap);
+const attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+const tiles = L.tileLayer(tileUrl, { attribution });
+
+tiles.addTo(mymap)
+
+
+let firstTime = true;
+
+getData()
+ function getData() {
+const latitude = document.getElementById('lat').value
+const longitude = document.getElementById('long').value
+
+const coord = {lat ,long}
+  
+    marker.setLatLng([latitude, longitude]);
+    if (firstTime) {
+
+        mymap.setView([latitude, longitude], 2);
+        firstTime = false;
+    }
+   
+};
+
+button.addEventListener("click",getData);
+
+//setInterval(getISS, 1000);
+
+
+</script>
+
+</body>
+
+</html>
